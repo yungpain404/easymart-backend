@@ -1,0 +1,12 @@
+{
+  "_id": "rev_333444",
+  "user_id": "usr_987654",
+  "user_name": "Anh Nguyễn",
+  "product_id": "prod_001",
+  "order_id": "ord_20260522_01",
+  "rating": 5,
+  "comment": "Sữa giao nhanh, date còn dài, đóng gói cẩn thận. Sẽ tiếp tục ủng hộ EasyMart!",
+  "is_visible": true,
+  "created_at": "2026-05-20T10:00:00Z",
+  "updated_at": "2026-05-25T10:00:00Z"
+}

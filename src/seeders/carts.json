@@ -1,0 +1,20 @@
+{
+  "_id": "cart_888999",
+  "user_id": "usr_987654",
+  "items": [
+    {
+      "product_id": "prod_001",
+      "name": "Sữa Tươi Tiệt Trùng Vinamilk 1L",
+      "price": 35000,
+      "quantity": 3
+    },
+    {
+      "product_id": "prod_005",
+      "name": "Bánh Mì Sandwich Kinh Đô Lát Dầy",
+      "price": 22000,
+      "quantity": 1
+    }
+  ],
+  "total_amount": 127000,
+  "updated_at": "2026-05-22T08:45:00Z"
+}

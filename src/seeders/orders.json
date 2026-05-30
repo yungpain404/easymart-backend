@@ -1,0 +1,33 @@
+{
+  "_id": "ord_20260522_01",
+  "user_id": "usr_987654",
+  "shipping_address": {
+    "recipient_name": "Nguyễn Văn A",
+    "phone": "0901234567",
+    "address_line": "123 Đường Lê Lợi",
+    "ward": "Phường Bến Thành",
+    "district": "Quận 1",
+    "province": "TP. Hồ Chí Minh",
+    "country": "Vietnam"
+  },
+  "items": [
+    {
+      "product_id": "prod_001",
+      "name": "Sữa Tươi Tiệt Trùng Vinamilk 1L",
+      "quantity": 2,
+      "unit_price": 35000
+    },
+    {
+      "product_id": "prod_012",
+      "name": "Nước Khoáng Lavie 500ml",
+      "quantity": 5,
+      "unit_price": 6000
+    }
+  ],
+  "status": "processing",
+  "payment_method": "COD",
+  "payment_status": "pending",
+  "total_amount": 100000,
+  "created_at": "2026-05-22T08:50:00Z",
+  "updated_at": "2026-05-22T09:15:00Z"
+}
