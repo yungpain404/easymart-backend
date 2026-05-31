@@ -47,5 +47,15 @@ const updateReview = async (req, res) => {
         res.status(500).json({message: error.message});
     }
 }
+//DELETE Review
+const deleteReview = async (req, res) => {
+    try {
+        const review = await Review.findOneAndDelete({_id: req.params.id});
+        if (!review) res.status(404).json({message: 'Review not found'});
+        res.status(200).json(review);
+    } catch (error) {
+        res.status(500).json({message: error.message});
+    }
+}
 
-module.exports = {getReviews, getReviewByUserID, getReviewByProductID, createReview, updateReview};
+module.exports = {getReviews, getReviewByUserID, getReviewByProductID, createReview, updateReview, deleteReview};

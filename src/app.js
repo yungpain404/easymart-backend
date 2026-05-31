@@ -12,11 +12,9 @@ app.use(express.json());
 
 //Middleware
 const loggerMiddleware = require('./middleware/loggerMiddleware');
-const authMiddleware = require('./middleware/authMiddleware');
 const errorMiddleware = require('./middleware/errorMiddleware');
 
 app.use(loggerMiddleware);
-app.use(authMiddleware);
 app.use(errorMiddleware);
 
 //Import Routes
@@ -25,6 +23,7 @@ const productRoutes = require('./routes/productRoutes');
 const cartRoutes = require('./routes/cartRoutes');
 const orderRoutes = require('./routes/orderRoutes');
 const reviewRoutes = require('./routes/reviewRoutes');
+const authRoutes = require('./routes/authRoutes');
 
 //Use routes
 app.use('/api/users', userRoutes);
@@ -32,6 +31,7 @@ app.use('/api/products', productRoutes)
 app.use('/api/carts', cartRoutes);
 app.use('/api/orders', orderRoutes);
 app.use('/api/reviews', reviewRoutes);
+app.use('/api/auth', authRoutes);
 
 app.get('/', (req, res) => {
     res.send('EasyMart API is running');
