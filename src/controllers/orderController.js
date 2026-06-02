@@ -37,5 +37,13 @@ const createOrder = async (req, res) => {
         res.status(500).json({message: error.message});
     }
 }
-
-module.exports = {getOrders, getOrder, getOrderByUserID, createOrder};
+//PATCH Order
+const updateStatusOrder = async (req, res) => {
+    try {
+        const order = await Order.findByIdAndUpdate(req.params.id, {status: req.body.status}, {new: true});
+        res.status(200).json(order);
+    } catch (error) {
+        res.status(500).json({message: error.message});
+    }
+}
+module.exports = {getOrders, getOrder, getOrderByUserID, createOrder, updateStatusOrder};

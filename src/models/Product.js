@@ -83,6 +83,10 @@ const productSchema = new mongoose.Schema({
     sold_count:{
         type: Number,
         default: 0
+    },
+    is_deleted:{
+        type: Boolean,
+        default: false
     }
 }, {timestamps: {createdAt: 'created_at', updatedAt: 'updated_at'}});
 
