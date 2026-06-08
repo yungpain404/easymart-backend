@@ -51,6 +51,10 @@ const productSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
+    unit:{
+        type: String,
+        required: true
+    },
     stock_quantity:{
         type: Number,
         default: 0

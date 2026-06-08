@@ -1,4 +1,8 @@
 const Product = require('../models/Product');
+
+const removeVietnameseTones = (str) =>{
+    return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/đ/g, 'd').replace(/Đ/g, 'D').toLowerCase();
+}
 //GET All Products
 const getProducts = async (req, res) => {
     try {
@@ -9,9 +13,11 @@ const getProducts = async (req, res) => {
         const limit = parseInt(req.query.limit) || 10;
         const skip = (page - 1) * limit;
         //Search
-        const keyword = req.query.q;
+        const keyword = removeVietnameseTones(req.query.q) || '';
         if (keyword) {
-            filter.name = {$regex: keyword, $options: 'i'};
+            products = products.filter(product => {
+                return removeVietnameseTones(product.name).includes(keyword);
+            });
         }
         //Filter
         const category = req.query.category;
