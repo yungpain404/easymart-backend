@@ -13,7 +13,7 @@ const getProducts = async (req, res) => {
         const limit = parseInt(req.query.limit) || 10;
         const skip = (page - 1) * limit;
         //Search
-        const keyword = removeVietnameseTones(req.query.q) || '';
+        const keyword = removeVietnameseTones(req.query.q || '');
         if (keyword) {
             products = products.filter(product => {
                 return removeVietnameseTones(product.name).includes(keyword);
