@@ -1,24 +1,20 @@
 const Product = require('../models/Product');
 
-const removeVietnameseTones = (str) =>{
+const removeVietnameseTones = (str) => {
     return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/đ/g, 'd').replace(/Đ/g, 'D').toLowerCase();
 }
 //GET All Products
 const getProducts = async (req, res) => {
     try {
         //Query Object
-        let filter = {is_deleted: false};
+        let filter = { is_deleted: false };
         //Pagination
         const page = parseInt(req.query.page) || 1;
         const limit = parseInt(req.query.limit) || 10;
         const skip = (page - 1) * limit;
         //Search
         const keyword = removeVietnameseTones(req.query.q || '');
-        if (keyword) {
-            products = products.filter(product => {
-                return removeVietnameseTones(product.name).includes(keyword);
-            });
-        }
+
         //Filter
         const category = req.query.category;
         if (category) {
@@ -34,21 +30,28 @@ const getProducts = async (req, res) => {
         }
 
         const products = await Product.find(filter).sort(sortOption).skip(skip).limit(limit);
+
+        let result = products;
+        if (keyword) {
+            result = products.filter(product => {
+                return removeVietnameseTones(product.name).includes(keyword);
+            });
+        }
         const total = await Product.countDocuments(filter);
-        
-        res.status(200).json({total, page, totalPages: Math.ceil(total/limit), products});
+
+        res.status(200).json({ total, page, totalPages: Math.ceil(total / limit), products: result.slice(skip, skip + limit) });
     } catch (error) {
-        res.status(500).json({message: error.message});
+        res.status(500).json({ message: error.message });
     }
 }
 //GET Product By Id
 const getProduct = async (req, res) => {
     try {
         const product = await Product.findById(req.params.id);
-        if (!product) res.status(404).json({message: 'Product not found'});
+        if (!product) res.status(404).json({ message: 'Product not found' });
         res.status(200).json(product);
     } catch (error) {
-        res.status(500).json({message: error.message});
+        res.status(500).json({ message: error.message });
     }
 }
 //POST Product
@@ -57,28 +60,28 @@ const createProduct = async (req, res) => {
         const product = await Product.create(req.body);
         res.status(201).json(product);
     } catch (error) {
-        res.status(500).json({message: error.message});
+        res.status(500).json({ message: error.message });
     }
 }
 //PUT Product By Id
 const updateProduct = async (req, res) => {
     try {
-        const product = await Product.findOneAndUpdate({_id: req.params.id}, req.body, {returnDocument: 'after'});
-        if (!product) res.status(404).json({message: 'Product not found'});
+        const product = await Product.findOneAndUpdate({ _id: req.params.id }, req.body, { returnDocument: 'after' });
+        if (!product) res.status(404).json({ message: 'Product not found' });
         res.status(200).json(product);
     } catch (error) {
-        res.status(500).json({message: error.message});
+        res.status(500).json({ message: error.message });
     }
 }
 //Soft DELETE Product By Id
 const deleteProduct = async (req, res) => {
     try {
-        const product = await Product.findByIdAndUpdate(req.params.id, {is_deleted: true}, {returnDocument: 'after'});
-        if (!product) res.status(404).json({message: 'Product not found'});
+        const product = await Product.findByIdAndUpdate(req.params.id, { is_deleted: true }, { returnDocument: 'after' });
+        if (!product) res.status(404).json({ message: 'Product not found' });
         res.status(200).json(product);
     } catch (error) {
-        res.status(500).json({message: error.message});
+        res.status(500).json({ message: error.message });
     }
 }
 
-module.exports = {getProducts, getProduct, createProduct, updateProduct, deleteProduct};
+module.exports = { getProducts, getProduct, createProduct, updateProduct, deleteProduct };
