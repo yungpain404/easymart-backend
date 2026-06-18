@@ -19,7 +19,9 @@ const register = async (req, res) => {
             email,
             password_hash: hashedPassword,
             role: 'customer',
-            is_active: true
+            is_active: true,
+            avatar_url: "https://res.cloudinary.com/dhremndbk/image/upload/v1781757247/easymart/ldexlvo8mwkdmfbxusfo.png",
+            phone
         });
 
         res.status(201).json(user);

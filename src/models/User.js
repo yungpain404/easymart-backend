@@ -86,6 +86,7 @@ const UserSchema = new mongoose.Schema({
     },
     avatar_url:{
         type: String
+        
     },
     role:{
         type: String,
