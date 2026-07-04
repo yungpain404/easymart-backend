@@ -47,6 +47,10 @@ const itemOrderSchema = new mongoose.Schema({
     unit_price:{
         type: Number,
         required: true
+    },
+    avatar_url:{
+        type: String,
+        required: true
     }
 }, {_id: false });
 
