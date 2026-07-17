@@ -14,6 +14,6 @@ router.get('/user/:userId', authMiddleware, getOrderByUserID);
 //POST Order
 router.post('/', authMiddleware, validateCreateOrder, createOrder);
 //PATCH Order
-router.patch('/:id/status', adminMiddleware, updateStatusOrder);
+router.patch('/:id/status', authMiddleware, updateStatusOrder);
 
 module.exports = router;

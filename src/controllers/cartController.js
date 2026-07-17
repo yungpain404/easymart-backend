@@ -12,10 +12,10 @@ const getCartByUserID = async (req, res) => {
 //Add product to cart
 const addToCart = async (req, res) => {
     try {
-        const {user_id, product_id, name, price, quantity} = req.body;
-        const cart = await Cart.findOne({user_id});
+        const {user_id, product_id, name, price, quantity, image} = req.body;
+        let cart = await Cart.findOne({user_id});
         if (!cart) {
-            const newCart = new Cart({
+            cart = new Cart({
                 _id: `cart_${Date.now()}`,
                 user_id,
                 items: []
@@ -35,13 +35,15 @@ const addToCart = async (req, res) => {
                 product_id,
                 name,
                 price,
-                quantity
+                quantity,
+                image
             });
         }
 
         cart.update_at = Date.now();
         await cart.save();
-        res.status(200).json(cart);
+        const populatedCart = await Cart.findOne({user_id});
+        res.status(200).json(populatedCart);
     } catch (error) {
         res.status(500).json({message: error.message});
     }
@@ -88,7 +90,7 @@ const clearCart = async (req, res) => {
         const cart = await Cart.findOne({user_id: req.params.userId});
         if (!cart) res.status(404).json({message: 'Cart not found'});
 
-        cart.otems = [];
+        cart.items = [];
 
         cart.update_at = Date.now();
         await cart.save();

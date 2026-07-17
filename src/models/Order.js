@@ -44,12 +44,12 @@ const itemOrderSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    unit_price:{
+    price:{
         type: Number,
         required: true
     },
-    avatar_url:{
-        type: String,
+    image:{
+        type: Array,
         required: true
     }
 }, {_id: false });
@@ -75,7 +75,7 @@ const orderSchema = new mongoose.Schema({
     },
     payment_method:{
         type: String,
-        enum: ['COD', 'MOMO', 'VNPAY','BANKING'],
+        enum: ['COD', 'VIETQR'],
         required: true
     },
     payment_status:{
@@ -83,6 +83,19 @@ const orderSchema = new mongoose.Schema({
         enum: ['pending', 'paid','failed', 'refunded'],
         default: 'pending'
     },
+    delivery_fee:{
+        type: Number,
+        required: true
+    },
+    delivery_tip:{
+        type: Number,
+        required: true
+    },
+    total_item:{
+        type: Number,
+        required: true
+    }
+    ,
     total_amount:{
         type: Number,
         required: true

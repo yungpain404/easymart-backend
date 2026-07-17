@@ -93,6 +93,12 @@ const UserSchema = new mongoose.Schema({
         enum: ['customer', 'staff','admin'],
         default: 'customer'
     },
+    payment_method:{
+        type: String,
+        enum: ['COD', 'VIETQR'],
+        default: 'COD', 
+        required: true
+    },
     is_active:{
         type: Boolean,
         default: true
@@ -104,7 +110,8 @@ const UserSchema = new mongoose.Schema({
         ref: 'Product'
     }],
     last_login:{
-        type: Date
+        type: Date,
+        default: Date.now()
     }
 },{timestamps:{createdAt: 'created_at', updatedAt: false}});
 

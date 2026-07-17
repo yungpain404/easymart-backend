@@ -40,7 +40,7 @@ const createOrder = async (req, res) => {
 //PATCH Order
 const updateStatusOrder = async (req, res) => {
     try {
-        const order = await Order.findByIdAndUpdate(req.params.id, {status: req.body.status}, {new: true});
+        const order = await Order.findByIdAndUpdate(req.params.id, {status: req.body.status, payment_status: req.body.payment_status, updated_at: Date.now()}, {new: true});
         res.status(200).json(order);
     } catch (error) {
         res.status(500).json({message: error.message});

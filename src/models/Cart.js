@@ -17,6 +17,10 @@ const itemCartSchema = new mongoose.Schema({
         type: Number,
         required: true,
         min: 1
+    },
+    image:{
+        type: Array,
+        required: true
     }
 }, {_id: false });
 
